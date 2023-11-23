@@ -1,0 +1,15 @@
+.navbar-container {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  float: right;
+  margin-inline: 2em;
+  margin-block: 1em;
+}
+.navbar-search {
+  width: 20vw;
+}
+.navbar-menu {
+  float: right;
+  background-color: #fff2cc;
+}
