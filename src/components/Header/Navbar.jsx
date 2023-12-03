@@ -1,15 +1,14 @@
 import api from "../../action/apis";
 import { Layout, Button, Dropdown, Menu } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import "./navbar.css";
 import { useEffect, useState } from "react";
 
 const fetchMenuItems = async () => {
   try {
-    const response = await api.get(
-      "top-left-menus?populate[dropdown][populate]=*"
-    );
-    console.log("response.data", response.data);
+    const response = await api.get();
     return response.data;
   } catch (error) {
     console.error("Error fetching menu items", error);
@@ -18,13 +17,15 @@ const fetchMenuItems = async () => {
 };
 
 function Navbar() {
-  const [items, setItems] = useState([]);
+  const [menu, setMenu] = useState([]);
+  const [submenu, setSubmenu] = useState([]);
+  const [body, setBody] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const menuItemsData = await fetchMenuItems();
-        setItems(menuItemsData?.data[0]?.attributes?.dropdown || []);
+        setMenu(menuItemsData?.headers[0].menu);
       } catch (error) {
         console.error("Error fetching menu items", error);
       }
@@ -32,35 +33,35 @@ function Navbar() {
     fetchData();
   }, []);
 
-  console.log("items", items);
-  let submenuItems = [];
+  console.log("menu", JSON.stringify(menu, undefined, 2));
 
-  items.map((item) => {
-    submenuItems.push({
-      key: item?.label,
-      children: item?.sections?.data?.map((val) => val.attributes.label),
-    });
+  const navmenu = menu.map((item, index) => {
+    return {
+      key: index,
+      label: item.name,
+      children: item.submenus.map((sub) => ({
+        key: sub.sub_menu_id,
+        label: sub.sub_menu_name,
+      })),
+    };
   });
 
-  console.log("submenuItems", submenuItems);
-
-  const menu = (
-    <Menu theme="light" mode="horizontal" style={{ margin: "2em" }}>
-      {submenuItems.map((subMenuItem) => (
-        <Menu.SubMenu key={subMenuItem.key} title={subMenuItem.key} style={{}}>
-          {subMenuItem.children.map((item) => (
-            <Menu.Item key={item}>{item}</Menu.Item>
-          ))}
-          {/* <Menu.Item key={subMenuItem.children}>
-            {console.log("subMenuItem.children", subMenuItem.children)}
-            {subMenuItem.children}
-          </Menu.Item> */}
-        </Menu.SubMenu>
-      ))}
-    </Menu>
+  return (
+    <>
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        triggerSubMenuAction="click"
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "flex-end",
+          paddingBlock: "0.75em",
+        }}
+        items={navmenu}
+      ></Menu>
+    </>
   );
-
-  return <div>{menu}</div>;
 }
 
 export default Navbar;
