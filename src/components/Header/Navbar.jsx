@@ -9,10 +9,10 @@ const fetchMenuItems = async () => {
     const response = await api.get(
       "top-left-menus?populate[dropdown][populate]=*"
     );
-    console.log("response.data", response.data);
+    // console.log("response.data", response.data);
     return response.data;
   } catch (error) {
-    console.error("Error fetching menu items", error);
+    console.error("Error fetching menu items ", error);
     throw error;
   }
 };
@@ -32,7 +32,7 @@ function Navbar() {
     fetchData();
   }, []);
 
-  console.log("items", items);
+  // console.log("items", items);
   let submenuItems = [];
 
   items.map((item) => {
@@ -42,10 +42,14 @@ function Navbar() {
     });
   });
 
-  console.log("submenuItems", submenuItems);
+  // console.log("submenuItems", submenuItems);
 
   const menu = (
-    <Menu theme="light" mode="horizontal" style={{ margin: "2em" }}>
+    <Menu
+      theme="dark"
+      mode="horizontal"
+      style={{ margin: "2em", display: "flex", justifyContent: "flex-end" }}
+    >
       {submenuItems.map((subMenuItem) => (
         <Menu.SubMenu key={subMenuItem.key} title={subMenuItem.key} style={{}}>
           {subMenuItem.children.map((item) => (
