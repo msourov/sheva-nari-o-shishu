@@ -1,36 +1,69 @@
 import { useContext } from "react";
-import { homepageContext } from "../pages/Homepage";
+import { HomepageContext } from "../pages/Homepage";
 import { Card, Col, Row } from "antd";
 
+// const cardStyle = {
+//   width: "100%",
+//   height: "100%",
+//   display: "flex",
+//   flexDirection: "column",
+//   justifyContent: "space-between",
+// };
+
+const cardStyle = {
+  // width: "300px",
+  // height: "120px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  alignItems: "center",
+  textAlign: "center",
+};
+
 const FoundationFacts = () => {
-  const { Foundation_Fact } = useContext(homepageContext);
-  console.log(Foundation_Fact);
+  const { fact } = useContext(HomepageContext);
+  console.log("facts", fact);
   return (
     <div>
-      <h2 className="text-orange-500 mt-5 ml-5 text-l font-semibold">
-        Foundation Facts
-      </h2>
-      <Row gutter={16} justify="center" align="middle">
+      <h1 className="text-center text-orange-500 text-3xl my-8">
+        {fact[0].title}
+      </h1>
+      {/* <Row gutter={16} justify="center" align="middle">
         <Col
-          xs={24} // Full width on small screens
-          sm={12} // Half width on medium screens
-          md={8} // One-third width on large screens
-          lg={6} // One-fourth width on extra-large screens
-          xl={6} // One-fourth width on extra-large screens
+          span={8}
           style={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "center", // Center the items horizontally
-            alignItems: "center", // Center the items vertically
+            justifyContent: "center",
+            alignItems: "center",
             margin: "auto",
           }}
         >
-          {/* {Foundation_Fact.map((item) => (
-            <Card title={item.amount} bordered>
-              {item.about}
+          {fact.slice(1, fact.length).map((item, index) => (
+            <Card
+              key={index}
+              title={item.data}
+              bordered={false}
+              style={cardStyle}
+            >
+              {item.description}
             </Card>
-          ))} */}
+          ))}
         </Col>
+      </Row> */}
+      <Row
+        gutter={16}
+        justify="center"
+        align="middle"
+        style={{ marginBlock: "2em" }}
+      >
+        {fact.slice(1, fact.length).map((item, index) => (
+          <Col key={index} span={6} style={{ margin: "0.5em 1em" }}>
+            <Card title={item.data} bordered={false} style={cardStyle}>
+              {item.description}
+            </Card>
+          </Col>
+        ))}
       </Row>
     </div>
   );

@@ -1,4 +1,4 @@
-import api from "../../action/apis";
+import api from "../../action/api";
 import { Layout, Button, Dropdown, Menu } from "antd";
 import { Link } from "react-router-dom";
 import "./navbar.css";

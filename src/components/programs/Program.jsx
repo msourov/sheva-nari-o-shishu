@@ -1,8 +1,12 @@
-import api from "../../action/apis";
+import api from "../../action/api";
 import { useContext } from "react";
-import { homepageContext } from "../../pages/Homepage";
-import { Carousel } from "antd";
+import { HomepageContext } from "../../pages/Homepage";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Card } from "antd";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+
 const { Meta } = Card;
 const contentStyle = {
   height: "160px",
@@ -12,45 +16,40 @@ const contentStyle = {
   background: "#364d79",
 };
 const Program = () => {
-  const { child_support_program } = useContext(homepageContext);
-  console.log(child_support_program);
+  const { program } = useContext(HomepageContext);
   return (
     <div>
-      <h2 className="text-orange-500 mt-5 ml-5 text-l font-semibold">
-        Our Child Support Program
-      </h2>
-      {/* <img src={child_support_program[0].image.data.attributes.url} /> */}
-      <Carousel
-        autoplay
-        style={{ marginBlock: "2em", width: "90%", marginInline: "auto" }}
+      <h1 className="text-center text-orange-500 text-3xl my-8">
+        {program[0]?.title}
+      </h1>
+      <Swiper
+        className="mt-10 mb-10"
+        slidesPerView={4}
+        spaceBetween={0}
+        autoplay={{ delay: 1000, disableOnInteraction: false }}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Pagination]}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginInline: "5em",
+        }}
+        // className="mySwiper"
       >
-        {/* {child_support_program?.map((item) => (
-          <Card
-            hoverable
-            style={{ width: "240px" }}
-            cover={
+        {program?.slice(1, program.length)?.map((item, ind) => (
+          <SwiperSlide>
+            <Card style={{ width: 300, background: "none", border: "none" }}>
               <img
-                src={item.image.data.attributes.url}
-                alt={item.image.data.attributes.name}
+                style={{ width: "240px", height: "160px" }}
+                src={`http://192.168.60.35:1336${item.image.url}`}
               />
-            }
-          >
-            <Meta title={item.about} />
-          </Card>
-        ))} */}
-        <div>
-          <h3 style={contentStyle}>1</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>2</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>3</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>4</h3>
-        </div>
-      </Carousel>
+              <p className="font-medium mx-auto border-none">{item.about}</p>
+            </Card>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };

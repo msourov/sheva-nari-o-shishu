@@ -1,45 +1,56 @@
 import axios from "axios";
-import api from "../action/apis";
-import FoundationFacts from "../components/FoundationFacts";
-import Foundation from "../components/FoundationFacts";
+import api from "../action/api";
 import Navbar from "../components/Header/Navbar";
 import Hero from "../components/Hero/Hero";
 import Program from "../components/programs/Program";
 import { useEffect, useState, createContext } from "react";
+import FoundationFacts from "../components/FoundationFacts";
+import Foundation from "../components/Foundation";
+import Partner from "../components/Partner";
 
-export const homepageContext = createContext();
-
-const fetchData = async () => {
-  try {
-    const response = await api.get("landing-pages");
-    // const data = await response.json();
-    // console.log(response?.data?.data[0]);
-    return response?.data?.data[0] || [];
-  } catch (error) {
-    console.error("Error fetching data: ", error);
-  }
-};
+export const HomepageContext = createContext();
 
 function HomePage() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const response = await api().get("landing-pages");
+      console.log("response", response);
+      return response?.data?.data[0] || [];
+    } catch (error) {
+      console.error("Error fetching data: ", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetchData()
-      .then((data) => setItems(data))
-      .finally(() => setLoading(false));
+    const fetchDataAsync = async () => {
+      const response = await fetchData();
+      setItems(response || []);
+    };
+
+    fetchDataAsync();
   }, []);
+
   if (loading) {
     return <p>Loading...</p>;
   }
-  console.log("items inside homepage", items);
+  // console.log("items inside homepage", items);
   return (
     <>
+      {/* {console.log("response.image", response.data.data[0].image.url)}
+      <img src={response.data.data[0].image.url} /> */}
       {/* <Navbar /> */}
-      <homepageContext.Provider value={items}>
+      <HomepageContext.Provider value={items}>
         <Hero />
-        {/* <Program /> */}
-        {/* <FoundationFacts /> */}
-      </homepageContext.Provider>
+        <Program />
+        <FoundationFacts />
+        <Foundation />
+        <Partner />
+      </HomepageContext.Provider>
     </>
   );
 }
