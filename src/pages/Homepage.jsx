@@ -13,6 +13,7 @@ export const HomepageContext = createContext();
 function HomePage() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -28,8 +29,15 @@ function HomePage() {
 
   useEffect(() => {
     const fetchDataAsync = async () => {
-      const response = await fetchData();
-      setItems(response || []);
+      try {
+        const response = await fetchData();
+        setItems(response || []);
+      } catch (error) {
+        console.error("Error in useEffect: ", error);
+        setError("Failed to fetch data. Please try again.");
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchDataAsync();
@@ -38,12 +46,15 @@ function HomePage() {
   if (loading) {
     return <p>Loading...</p>;
   }
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
   // console.log("items inside homepage", items);
   return (
     <>
       {/* {console.log("response.image", response.data.data[0].image.url)}
       <img src={response.data.data[0].image.url} /> */}
-      {/* <Navbar /> */}
+      <Navbar />
       <HomepageContext.Provider value={items}>
         <Hero />
         <Program />
