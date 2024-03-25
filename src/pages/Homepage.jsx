@@ -1,16 +1,15 @@
-import axios from "axios";
 import api from "../action/api";
-import Navbar from "../components/Header/Navbar";
-import Hero from "../components/Hero/Hero";
-import Program from "../components/programs/Program";
-import { useEffect, useState, createContext } from "react";
 import FoundationFacts from "../components/FoundationFacts";
 import Foundation from "../components/Foundation";
 import Partner from "../components/Partner";
+import Footer from "../components/Footer";
+import Hero from "../components/Hero/Hero";
+import Program from "../components/programs/Program";
+import { useEffect, useState, createContext } from "react";
 
 export const HomepageContext = createContext();
 
-function HomePage() {
+const Homepage = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -49,12 +48,8 @@ function HomePage() {
   if (error) {
     return <p>Error: {error}</p>;
   }
-  // console.log("items inside homepage", items);
   return (
-    <>
-      {/* {console.log("response.image", response.data.data[0].image.url)}
-      <img src={response.data.data[0].image.url} /> */}
-      <Navbar />
+    <div style={{ outline: "auto" }}>
       <HomepageContext.Provider value={items}>
         <Hero />
         <Program />
@@ -62,8 +57,8 @@ function HomePage() {
         <Foundation />
         <Partner />
       </HomepageContext.Provider>
-    </>
+    </div>
   );
-}
+};
 
-export default HomePage;
+export default Homepage;

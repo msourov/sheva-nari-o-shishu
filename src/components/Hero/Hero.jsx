@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import { HomepageContext } from "../../pages/Homepage";
 import "./hero.css";
+import { HomepageContext } from "../../pages/Homepage";
 
 function Hero() {
   const itemsFromContext = useContext(HomepageContext);

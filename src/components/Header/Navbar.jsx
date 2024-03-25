@@ -8,6 +8,7 @@ function Navbar() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+
   const fetchMenu = async () => {
     try {
       setLoading(true);
@@ -16,6 +17,7 @@ function Navbar() {
       return response?.data || [];
     } catch (error) {
       console.error("Error fetching data: ", error);
+      setError("Failed to fetch data. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -33,7 +35,6 @@ function Navbar() {
         setLoading(false);
       }
     };
-
     fetchMenuAsync();
   }, []);
 
@@ -58,42 +59,60 @@ function Navbar() {
 
   console.log(JSON.stringify(menus, undefined, 2));
 
-  // items.map((item) => {
-  //   submenuItems.push({
-  //     key: item?.label,
-  //     children: item?.sections?.data?.map((val) => val.attributes.label),
-  //   });
-  // });
+  const menuItems = menus.map((item) => {
+    if (!item.children || item.children.length === 0) {
+      return (
+        <Menu.Item key={item.key} theme="dark">
+          <Link to={item.link}>{item.label}</Link>
+        </Menu.Item>
+      );
+    }
 
-  // console.log("submenuItems", submenuItems);
+    return (
+      <Menu.SubMenu key={item.key} title={item.label} theme="dark">
+        {item.children.map((subMenuItem) => (
+          <Menu.Item key={subMenuItem.key}>
+            <Link to={subMenuItem.link}>{subMenuItem.label}</Link>
+          </Menu.Item>
+        ))}
+      </Menu.SubMenu>
+    );
+  });
 
-  const menu = (
+  return (
     <Menu
-      theme="dark"
+      theme="none"
       mode="horizontal"
-      style={{
-        margin: "2em",
-        display: "flex",
-        justifyContent: "flex-end",
-        // backgroundColor: "dark",
-      }}
-      items={menus}
-    />
-    //   {submenuItems.map((subMenuItem) => (
-    //     <Menu.SubMenu key={subMenuItem.key} title={subMenuItem.key} style={{}}>
-    //       {subMenuItem.children.map((item) => (
-    //         <Menu.Item key={item}>{item}</Menu.Item>
-    //       ))}
-    //       {/* <Menu.Item key={subMenuItem.children}>
-    //         {console.log("subMenuItem.children", subMenuItem.children)}
-    //         {subMenuItem.children}
-    //       </Menu.Item> */}
-    //     </Menu.SubMenu>
-    //   ))}
-    // </Menu>
+      style={{ display: "flex", justifyContent: "space-between" }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          // outline: "auto",
+          margin: "none",
+          padding: "0",
+          height: "50px",
+          width: "30%",
+        }}
+      >
+        <Link to="/">
+          <img
+            src="./sheva_transparent.png"
+            style={{
+              // margin: "0 2em 0 0",
+              // outline: "auto",
+              padding: "0",
+              width: "30%",
+            }}
+          />
+        </Link>
+      </div>
+      <Menu.ItemGroup style={{ margin: "0", padding: "0" }}>
+        {menuItems}
+      </Menu.ItemGroup>
+    </Menu>
   );
-
-  return <div>{menu}</div>;
 }
 
 export default Navbar;

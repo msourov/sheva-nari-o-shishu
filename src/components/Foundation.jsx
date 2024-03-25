@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { HomepageContext } from "../pages/Homepage";
 import { Card, Row } from "antd";
+import { HomepageContext } from "../pages/Homepage";
 
 const Foundation = () => {
   const { Foundation } = useContext(HomepageContext);

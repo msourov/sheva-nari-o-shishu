@@ -1,11 +1,11 @@
 import api from "../../action/api";
 import { useContext } from "react";
-import { HomepageContext } from "../../pages/Homepage";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Card } from "antd";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { HomepageContext } from "../../pages/Homepage";
 
 const { Meta } = Card;
 const contentStyle = {
