@@ -115,6 +115,7 @@ function Navbar() {
 					alignItems: "center",
 					// outline: "auto",
 					margin: "none",
+					marginInline: "3%",
 					padding: "0",
 					// height: "50px",
 					width: "15%",

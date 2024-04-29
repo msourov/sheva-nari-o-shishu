@@ -18,25 +18,43 @@ const Foundation = () => {
 			<div
 				style={{
 					overflow: "hidden",
-					
 				}}
 			>
-				<h1 className="text-center text-orange-500 text-3xl py-8 font-medium">
+				<h1 className="text-center text-orange-500 text-3xl py-16 font-medium">
 					{Foundation[0].title}
 				</h1>
 				<Row
 					gutter={16}
-					justify="center"
+					justify="space-evenly"
 					align="middle"
 					style={{ marginBottom: "1em" }}
 				>
 					{Foundation?.slice(1, Foundation.length)?.map((item, index) => (
-						<div style={{ width: 300, background: "none" }} key={`fd${index}`}>
+						<div
+							style={{
+								background: "none",
+								display: "flex",
+								flexDirection: "column",
+								// gap: "1em",
+								justifyContent: "space-between",
+								alignItems: "center",
+								// height: "240px",
+								// width: "30%",
+								// outline: "auto",
+								overflow: "hidden",
+							}}
+							key={`fd${index}`}
+						>
 							<img
-								style={{ width: "240px", height: "160px" }}
+								style={{ width: "240px", height: "180px", overflow: "hidden" }}
 								src={`http://192.168.60.35:1336${item.image.url}`}
 							/>
-							<p className="font-medium text-center">{item.about}</p>
+							<p
+								className="font-bold text-center max-w-full w-2/5 bg-white h-46 flex-1"
+								style={{ alignSelf: "center" }}
+							>
+								{item.about}
+							</p>
 						</div>
 					))}
 				</Row>
