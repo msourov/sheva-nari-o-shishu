@@ -30,10 +30,18 @@ const Footer = () => {
             <li className="py-2 px-4">Generation of Bangladesh</li>
           </ul>
           <ul className="w-full md:w-auto">
-            <li className="py-2 px-4">Micro Credit</li>
-            <li className="py-2 px-4">Partnership Program</li>
-            <li className="py-2 px-4">Day Care</li>
-            <li className="py-2 px-4">Consultancy Services</li>
+            <li className="py-2 px-4">
+              <Link to="microCredit">Micro Credit</Link>
+            </li>
+            <li className="py-2 px-4">
+              <Link to="partnershipProgram">Partnership Program</Link>
+            </li>
+            <li className="py-2 px-4">
+              <Link to="/dayCare">Day Care</Link>
+            </li>
+            <li className="py-2 px-4">
+              <Link to="/consultancyServices">Consultancy Services</Link>
+            </li>
           </ul>
         </div>
         <div className="flex justify-end md:justify-start">
