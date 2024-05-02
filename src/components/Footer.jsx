@@ -53,7 +53,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="text-center bg-black text-white font-thin">
-        All rights reserved Hidayah Smart Solutions. 2024
+        All rights reserved | Hidayah Smart Solutions | 2024
       </div>
     </>
   );

@@ -10,90 +10,95 @@ import { motion } from "framer-motion";
 
 const { Meta } = Card;
 const contentStyle = {
-	height: "160px",
-	color: "#fff",
-	lineHeight: "160px",
-	textAlign: "center",
-	background: "#364d79",
+  height: "160px",
+  color: "#fff",
+  lineHeight: "160px",
+  textAlign: "center",
+  background: "#364d79",
 };
 const Program = () => {
-	const { program } = useContext(HomepageContext);
-	return (
-		program && (
-			<div
-				style={{
-					backgroundColor: "ghostwhite",
-					paddingBlock: "1.25em",
-					// paddingBottom: "1em",
-					// padding: "2% 3% 3% 3%",
-				}}
-			>
-				<h1 className="text-center text-orange-500 text-3xl py-8 font-medium">
-					{program[0]?.title}
-				</h1>
-				<hr />
-				<Swiper
-					slidesPerView={3}
-					spaceBetween={10}
-					// centeredSlides={true}
-					autoplay={{
-						delay: 2500,
-						disableOnInteraction: false,
-					}}
-					pagination={{
-						clickable: true,
-					}}
-					navigation={true}
-					breakpoints={{
-						390: {
-							slidesPerView: 1,
-							spaceBetween: 20,
-						},
-						540: {
-							slidesPerView: 2,
-							spaceBetween: 30,
-						},
-						1024: {
-							slidesPerView: 3,
-							spaceBetween: 50,
-						},
-					}}
-					modules={[Autoplay, Pagination, Navigation]}
-					className="mySwiper mx-20"
-					key={"program"}
-				>
-					{program?.slice(1, program.length)?.map((item, ind) => (
-						<SwiperSlide className="flex justify-evenly bg-orange-50 my-10  shadow-xl hover: cursor-pointer">
-							<motion.div
-								whileHover={{ scale: 1.1 }}
-								transition={{ type: "spring, stiffness: 400 damping: 50" }}
-							>
-								<Card
-									style={{
-										background: "none",
-										border: "none",
-										// outline: "auto",
-										display: "flex",
-										justifyContent: "center",
-										height: "70%",
-										margin: "1em",
-									}}
-								>
-									<img
-										style={{ height: "220px", zIndex: "0" }}
-										src={`http://192.168.60.35:1336${item.image.url}`}
-									/>
-									<span>
-										<p className="font-medium mx-auto border-none z-10">
-											{item.about}
-										</p>
-									</span>
-								</Card>
-							</motion.div>
-						</SwiperSlide>
-					))}
-				</Swiper>
-				{/* <Swiper
+  const { program } = useContext(HomepageContext);
+  return (
+    program && (
+      <div
+        style={{
+          backgroundColor: "ghostwhite",
+          // paddingBlock: "1.25em",
+          // paddingBottom: "1em",
+          // padding: "2% 3% 3% 3%",
+        }}
+      >
+        <h1 className="text-center text-orange-500 text-3xl py-16 font-medium">
+          {program[0]?.title}
+        </h1>
+        {/* <hr /> */}
+        <Swiper
+          slidesPerView={3}
+          spaceBetween={10}
+          // centeredSlides={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          breakpoints={{
+            390: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            540: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 50,
+            },
+          }}
+          modules={[Autoplay, Pagination, Navigation]}
+          className="mySwiper mx-20"
+          key={"program"}
+        >
+          {program?.slice(1, program.length)?.map((item, ind) => (
+            <SwiperSlide className="flex justify-evenly bg-orange-50 mb-10  shadow-xl hover: cursor-pointer">
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring, stiffness: 400 damping: 50" }}
+              >
+                <Card
+                  style={{
+                    background: "none",
+                    border: "none",
+                    // outline: "auto",
+                    display: "flex",
+                    justifyContent: "center",
+                    height: "70%",
+                    margin: "1em",
+                  }}
+                >
+                  <img
+                    style={{
+                      height: "220px",
+                      zIndex: "0",
+                      margin: "auto",
+                    }}
+                    src={`https://api.shevabd.org${item.image.url}`}
+                    alt="cards"
+                  />
+                  <span>
+                    <p className="font-medium mx-auto border-none z-10 text-center">
+                      {item.about}
+                    </p>
+                  </span>
+                </Card>
+              </motion.div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        {/* <Swiper
 					slidesPerView={3}
 					spaceBetween={10}
 					pagination={{
@@ -144,9 +149,9 @@ const Program = () => {
 						Slide 9
 					</SwiperSlide>
 				</Swiper> */}
-			</div>
-		)
-	);
+      </div>
+    )
+  );
 };
 
 export default Program;

@@ -12,6 +12,7 @@ import MicroCredit from "./pages/MicroCredit";
 import ConsultancyService from "./pages/ConsultancyService";
 import AnnualAudit from "./pages/AnnualAudit";
 import AwardRecognition from "./pages/AwardRecognition";
+import Bangabandhu from "./pages/Bangabandhu";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
         path: "/consultancyServices",
         element: <ConsultancyService />,
       },
+      // {
+      //   path: "/bangabandhu-corner",
+      //   element: <Bangabandhu />,
+      // },
       {
         path: "*",
         element: <Demo />,
