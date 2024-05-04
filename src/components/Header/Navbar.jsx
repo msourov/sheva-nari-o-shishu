@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
-import Bangabandhu from "../../pages/Bangabandhu";
 
 const { Header } = Layout;
 
@@ -32,6 +31,7 @@ function Navbar() {
     const fetchMenuAsync = async () => {
       try {
         const response = await fetchMenu();
+        console.log(response.data);
         setItems(response.data || []);
       } catch (error) {
         console.error("Error in useEffect: ", error);
@@ -70,8 +70,13 @@ function Navbar() {
   const menuItems = (
     <Menu
       theme="light"
-      mode="vertical"
-      style={{ border: "none", fontSize: "0.92rem" }}
+      mode="horizontal"
+      style={{
+        border: "none",
+        fontSize: "0.92rem",
+        gap: "3%",
+        marginLeft: "3%",
+      }}
     >
       {menus.map((item) => (
         <Menu.SubMenu key={item.key} title={item.label}>
@@ -103,10 +108,14 @@ function Navbar() {
           />
         </Link>
       </div>
-      {windowWidth > 1310 ? (
-        <Menu theme="none" mode="horizontal" className="flex-grow mx-0 px-0">
+      {windowWidth > 900 ? (
+        <Menu
+          theme="none"
+          mode="horizontal"
+          className="flex-grow mx-0 px-0 flex justify-between"
+        >
           {menuItems}
-          <div
+          {/* <div
             style={{
               marginTop: "0.5em",
               fontSize: "1rem",
@@ -114,10 +123,10 @@ function Navbar() {
               fontSize: "0.92rem",
             }}
           >
-            {/* <Link to="/bangabandhu-corner" element={<Bangabandhu />}>
+            <Link to="/bangabandhu-corner" element={<Bangabandhu />}>
               Bangabandhu Corner
-            </Link> */}
-          </div>
+            </Link>
+          </div> */}
         </Menu>
       ) : (
         <Button

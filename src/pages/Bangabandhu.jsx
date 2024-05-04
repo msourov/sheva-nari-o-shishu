@@ -7,7 +7,7 @@ const Bangabandhu = () => {
         <img
           src="./bangabandhu.webp"
           alt="bangabandhu"
-          className="m-auto mt-10"
+          className="m-auto mt-10 md:w-3/12 lg: w-6/12"
         />
         <h1 className="text-xl mt-4 text-[#F97317] font-bold">
           জাতির জনক বঙ্গবন্ধু শেখ মুজিবুর রহমান

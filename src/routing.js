@@ -13,6 +13,8 @@ import ConsultancyService from "./pages/ConsultancyService";
 import AnnualAudit from "./pages/AnnualAudit";
 import AwardRecognition from "./pages/AwardRecognition";
 import Bangabandhu from "./pages/Bangabandhu";
+import AboutUs from "./pages/AboutUs";
+import Contact from "./pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -63,10 +65,18 @@ const router = createBrowserRouter([
         path: "/consultancyServices",
         element: <ConsultancyService />,
       },
-      // {
-      //   path: "/bangabandhu-corner",
-      //   element: <Bangabandhu />,
-      // },
+      {
+        path: "/bangabandhu-corner",
+        element: <Bangabandhu />,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
       {
         path: "*",
         element: <Demo />,

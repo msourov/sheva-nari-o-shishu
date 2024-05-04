@@ -65,7 +65,7 @@ const Foundation = () => {
           justify="space-evenly"
           align="middle"
           style={{ marginBottom: "1em" }}
-          className="bg-black p-8 rounded-lg"
+          className="p-8 rounded-lg"
         >
           {Foundation?.slice(1, Foundation.length)?.map((item, index) => (
             <div

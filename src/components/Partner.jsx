@@ -8,7 +8,7 @@ const Partner = () => {
 
   return (
     partner && (
-      <div style={{ overflow: "hidden" }}>
+      <div style={{ overflow: "hidden", backgroundColor: "black" }}>
         <h1 className="text-center text-orange-500 text-3xl pt-12 pb-8 font-medium">
           {partner[0].title}
         </h1>
@@ -34,7 +34,11 @@ const Partner = () => {
             // >
             <div className="shadow-md hover:shadow-lg m-4">
               <Card
-                style={{ width: "300px", background: "none", padding: "20px" }}
+                style={{
+                  width: "300px",
+                  background: "",
+                  padding: "20px",
+                }}
               >
                 <img
                   style={{ width: "100%", height: "150px" }}
